@@ -1,2 +1,8 @@
 #!/bin/sh
 mongod --config /usr/local/etc/mongod.conf
+
+# default port is 27017
+
+# to close: run mongo
+# use admin
+# db.shutdownServer()
