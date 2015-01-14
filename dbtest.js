@@ -3,12 +3,11 @@
     {
         "use strict";
 
-        var MongoClient = require('mongodb').MongoClient,
-            Server = require('mongodb').Server;
+        var MongoClient = require('mongodb').MongoClient;
 
-        var client = new MongoClient(new Server('localhost', 27017));
+        var connection = process.env.MONGOLAB_URI || "mongodb://localhost/";
 
-        client.open(function(err, client)
+        MongoClient.connect(connection, function(err, client)
         {
             if (err)
             {
