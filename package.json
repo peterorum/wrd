@@ -6,6 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "engines": {
+    "node": "0.10.x"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/peterorum/wrd.git"
@@ -15,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/peterorum/wrd/issues"
   },
-  "homepage": "https://github.com/peterorum/wrd"
+  "homepage": "https://github.com/peterorum/wrd",
+  "dependencies": {
+    "mongodb": "^1.4.28"
+  }
 }
