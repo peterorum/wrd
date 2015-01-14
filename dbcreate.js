@@ -5,9 +5,9 @@
 
         var MongoClient = require('mongodb').MongoClient;
 
-        var connection = process.env.MONGOLAB_URI || "mongodb://localhost/";
+        var connection = process.env.MONGOLAB_URI || "mongodb://localhost/wrd";
 
-        MongoClient.connect(connection, function(err, client)
+        MongoClient.connect(connection, function(err, db)
         {
             if (err)
             {
@@ -15,26 +15,21 @@
             }
             else
             {
-                var db = client.db("wrd");
+                console.log('connected');
 
-                if (db)
+                db.createCollection('users', function(err, collection)
                 {
-                    console.log('connected');
-
-                    db.createCollection('users', function(err, collection)
+                    if (!err)
                     {
-                        if (!err)
-                        {
-                            console.log('collection & db created');
-                        }
-                        else
-                        {
-                            console.log('Error', err);
-                        }
+                        console.log('collection & db created');
+                    }
+                    else
+                    {
+                        console.log('Error', err);
+                    }
 
-                        client.close();
-                    });
-                }
+                    db.close();
+                });
             }
         });
 
