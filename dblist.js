@@ -20,21 +20,44 @@
 
                 if (db)
                 {
-                    console.log('connected');
-
-                    var adminDb = db.admin();
-
-                    adminDb.listDatabases(function(err, databases)
+                    db.collection("users", function(err, users)
                     {
-                        if (err)
+                        users.find(function(err, items)
                         {
-                            console.log(err);
-                        }
+                            items.toArray(function(err, itemArr)
+                            {
+                                console.log("Document Array: ");
+                                console.log(itemArr);
+                            });
+                        });
 
-                        console.log(databases);
+                        users.find(function(err, items)
+                        {
+                            items.each(function(err, item)
+                            {
+                                if (item)
+                                {
+                                    console.log("Singular Document: ");
+                                    console.log(item);
+                                }
+                            });
+                        });
 
-                        client.close();
+                        users.findOne(
+                        {
+                            email: 'peter@peterorum.com'
+                        }, function(err, item)
+                        {
+                            console.log("Found One: ");
+                            console.log(item);
+                        });
                     });
+
+                    setTimeout(function()
+                    {
+                        client.close();
+                    }, 3000);
+
 
                 }
             }
