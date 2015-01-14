@@ -5,18 +5,6 @@
 
         var http = require('http');
 
-        var MongoClient = require('mongodb').MongoClient,
-            Server = require('mongodb').Server;
-
-        var mongoClient = new MongoClient(new Server('localhost', 27017));
-
-        mongoClient.open(function(err, mongoClient)
-        {
-            var db1 = mongoClient.db("mydb");
-
-            mongoClient.close();
-        });
-
         http.createServer(function(request, response)
         {
             // html
@@ -35,10 +23,7 @@
             // body
             response.write('<body ng-app="wrdApp">\n');
 
-            response.write('Helo\n');
-
-
-
+            response.write('Helo mongo\n');
 
             response.write('<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular.min.js"></script>\n');
 
