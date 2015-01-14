@@ -5,7 +5,8 @@
 
         var MongoClient = require('mongodb').MongoClient;
 
-        var connection = process.env.MONGOLAB_URI || "mongodb://localhost/";
+        // lust server, without databsae
+        var connection = process.env.MONGOLAB_URI.replace("(.*)/.*$", "$1") || "mongodb://localhost/";
 
         MongoClient.connect(connection, function(err, client)
         {

@@ -7,33 +7,25 @@
 
         var connection = process.env.MONGOLAB_URI || "mongodb://localhost/";
 
-        MongoClient.connect(connection, function(err, client)
+        MongoClient.connect(connection, function(err, db)
         {
             if (err)
             {
                 console.log('db connection failed', err);
             }
-            else
+            console.log('connected');
+
+            db.dropDatabase('users', function(err, results)
             {
-                var db = client.db("wrd");
+                console.log(err || '');
 
-                if (db)
+                if (!err)
                 {
-                    console.log('connected');
-
-                    db.dropDatabase('users', function(err, results)
-                    {
-                        console.log(err || '');
-
-                        if (!err)
-                        {
-                            console.log('db deleted');
-                        }
-
-                        client.close();
-                    });
+                    console.log('db deleted');
                 }
-            }
+
+                db.close();
+            });
         });
 
     }());
