@@ -21,7 +21,7 @@
                 {
                     if (!err)
                     {
-                        console.log('collection & db created');
+                        console.log('collection created');
                     }
                     else
                     {

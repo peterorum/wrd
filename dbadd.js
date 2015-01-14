@@ -17,9 +17,9 @@
 
         var MongoClient = require('mongodb').MongoClient;
 
-        var connection = process.env.MONGOLAB_URI || "mongodb://localhost/";
+        var connection = process.env.MONGOLAB_URI || "mongodb://localhost/wrd";
 
-        MongoClient.connect(connection, function(err, client)
+        MongoClient.connect(connection, function(err, db)
         {
             if (err)
             {
@@ -27,27 +27,20 @@
             }
             else
             {
-                var db = client.db("wrd");
+                db.dropCollection("users");
 
-                if (db)
+                db.createCollection('users', function(err, collection)
                 {
-                    db.dropCollection("users");
-
-                    db.createCollection('users', function(err, collection)
+                    addObject(collection,
                     {
-                        addObject(collection,
-                        {
-                            "email": "peter@peterorum.com"
-                        });
+                        "email": "peter@peterorum.com"
                     });
+                });
 
-                    setTimeout(function()
-                    {
-                        client.close();
-                    }, 3000);
-
-
-                }
+                setTimeout(function()
+                {
+                    db.close();
+                }, 3000);
             }
         });
 
