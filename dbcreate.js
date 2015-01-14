@@ -27,6 +27,10 @@
                         {
                             console.log('collection & db created');
                         }
+                        else
+                        {
+                            console.log('Error', err);
+                        }
 
                         client.close();
                     });
