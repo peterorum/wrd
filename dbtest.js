@@ -5,9 +5,9 @@
 
         var MongoClient = require('mongodb').MongoClient;
 
-        var connection = process.env.MONGOLAB_URI || "mongodb://localhost/";
+        var connection = process.env.MONGOLAB_URI || "mongodb://localhost/wrd";
 
-        MongoClient.connect(connection, function(err, client)
+        MongoClient.connect(connection, function(err, db)
         {
             if (err)
             {
@@ -15,27 +15,9 @@
             }
             else
             {
-                var db = client.db("wrd");
+                console.log('connected');
 
-                if (db)
-                {
-                    console.log('connected');
-
-                    var adminDb = db.admin();
-
-                    adminDb.listDatabases(function(err, databases)
-                    {
-                        if (err)
-                        {
-                            console.log(err);
-                        }
-
-                        console.log(databases);
-
-                        client.close();
-                    });
-
-                }
+                db.close();
             }
         });
 
